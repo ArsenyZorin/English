@@ -74,18 +74,34 @@ Pressing the button "Take a snapshot" changes the value of the take\_pict boolea
 
 The method EndOfWork, that stops streaming and frees used resources, is called after after closing the window.
 
-
 \subsection{Working with TWAIN library}
+We need to program a button for documents scanning. There will be selection of data sources after clicking on the button (if there are several connected scanners). After selecting of the source, scanning will start and received file will be stored at the specific folder in .jpeg format. We have to close data source after finishing the scanning.
+
+There are a lot of different methods in the TWAIN library. However, only several of them will be used for completing the task:
+\begin{itemize}
+\item OpenDataSource() - Opens a data source. Type of return value - bool. Value true if operation is successful, else - false. 
+\item SelectDataSource() - Shows dialog window for selecting a data source. Type of return value - bool. Value true if operation is successful, else - false.
+\item Property ShowUI - Gets or sets a value indicating wether to show user interface (UI) of TWAIN-source (to speed up value sets as false)
+\item Acquire() - Gets an image from a data source. Type of return value - void. 
+\item GetImage(int index) - Returns a scanned image. The parameter index - index of return image. Type of return value - System.Drawin.Image. 
+\item CloseDataSource() - Closes a data source. Type of return value - bool. Value true if operation is successful, else - false.
+\end{itemize}
+
+The platform of developed software was changed to 32-bit(x86). The reason is that 64-bit(x64) platform is not supported with all scanners.
 
 \subsection{Working with Microsoft.Office.Interop}
+For beginning the work with Word and Excel documents from Visual Studio, it is necessary to add references into the project: Microsoft.Office.Interop.Word and Microsoft.Office.Interop.Excel. 
 
 \subsubsection{Working with Microsoft.Office.Interop.Word}
+The words starting wigth \@ must be replaced with values of table cells during the creation of acts. Application object, which is the parent of all objects, used for working  in the .NET. The work with its methods and properties is available after the reference on this object was received. This object provides a big set of methods and properties that allows to manage the Microsoft Word. 
+
+Particularly all Word functions require an object parameters.
+
 
 \subsubsection{Working with Microsoft.Office.Interop.Excel}
 
 \subsection{Working with Yandex.Disk}
 
 \section{Conclusion}
-
 
 \end{document}
